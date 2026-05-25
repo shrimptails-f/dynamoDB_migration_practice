@@ -24,6 +24,12 @@ tasks:
     cmds:
       - codex --dangerously-bypass-approvals-and-sandbox
 
+  seed:
+    desc: "DynamoDBにサンプルデータを投入します。"
+    dir: tools/seeder
+    cmds:
+      - go run main.go
+
   infra:install:
     desc: "Go CDK と CLI 依存関係をインストールする"
     dir: infra

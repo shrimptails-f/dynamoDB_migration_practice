@@ -1,5 +1,11 @@
 # このリポジトリについて
 
+ローカルでAWSエミュレーターへのDynamoDBテーブル作成・管理を本番運用に向けてIaC管理として検討したPoCです。  
+エミュレーターにはライセンス料金の観点から[floci](https://github.com/floci-io/floci)を採用しています。  
+また、IaCにはAWS CDK/Goを採用しバックエンドとインフラ構成管理を兼任したリポジトリとしています。  
+
+DynamoDBにおけるマイグレーションの検討については[こちら](./docs/dynamodb_spec.md)を参照してください。
+
 ## 環境構築手順
 
 1. ソースをクローン
@@ -15,15 +21,20 @@ cp .devcontainer/.env.sample .devcontainer/.env
 
 ### ローカル環境
 
+1. テーブル作成
 ```bash
+# テーブル作成
 task infra:install
 task infra:deploy:local
 
-# リソース削除
-task infra:destroy:local
+# サンプルデータ投入
+task seed
 
 # dynamoDBにレコード作成
 go run internal/main.go 
+
+# リソース削除をする場合
+# task infra:destroy:local
 ```
 
 ### 実AWS環境

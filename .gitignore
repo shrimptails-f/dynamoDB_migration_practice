@@ -2,6 +2,7 @@
 
 # ビルドファイル
 infra/infra
+seeder
 
 # node
 node_modules
