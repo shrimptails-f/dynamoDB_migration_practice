@@ -1,0 +1,19 @@
+{
+  "name": "backend-infra-cli",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "synth": "cdk synth",
+    "bootstrap": "cdk bootstrap",
+    "deploy": "cdk deploy --require-approval never",
+    "destroy": "cdk destroy --force",
+    "synth:local": "cdklocal synth",
+    "bootstrap:local": "cdklocal bootstrap",
+    "deploy:local": "cdklocal deploy --require-approval never",
+    "destroy:local": "cdklocal destroy --force"
+  },
+  "devDependencies": {
+    "aws-cdk": "^2.1124.1",
+    "aws-cdk-local": "^3.0.4"
+  }
+}

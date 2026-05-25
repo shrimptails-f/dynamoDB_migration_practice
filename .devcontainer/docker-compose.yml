@@ -1,0 +1,39 @@
+version: "3"
+services:
+  go:
+    build:
+      context: ../
+      dockerfile: .devcontainer/infra/go/Dockerfile
+      args:
+        - APP_ROOT=$APP_ROOT
+    env_file:
+      - .env
+    tty: true
+    depends_on:
+      - "floci"
+    ports:
+      - ${GO_PORT}:${GO_PORT}
+      - "1455:1455"
+    volumes:
+      - ../:$APP_ROOT
+      - ~/.gitconfig:/root/.gitconfig
+    networks:
+      default:
+
+  floci:
+    image: floci/floci:latest
+    ports:
+      - "4566:4566"
+    volumes:
+    # `npm run bootstrap` は `CDKToolkit` 作成時に `ECR` リポジトリを作るため、`floci` 側で Docker が使える必要があります。
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - FLOCI_HOSTNAME=floci
+    networks:
+      default:
+        aliases:
+          - floci.sandbox.local
+          - s3.floci.sandbox.local
+
+volumes:
+  go-modules:
